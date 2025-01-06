@@ -6,8 +6,11 @@ name = "pypi"
 [packages]
 django = "*"
 django-compressor = "*"
+gunicorn = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.12.3"
+
