@@ -11,6 +11,9 @@ module.exports = {
                 primary: '#FF9B9B',
                 secondary: '#4B5563',
             },
+            fontFamily: {
+                Tinos: ["Tinos", "serif"],
+            },
         },
       },
       plugins: [
