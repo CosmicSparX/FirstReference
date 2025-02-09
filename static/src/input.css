@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.scroll-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scroll-container::-webkit-scrollbar {
+    display: none;
+}
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.animate-scroll {
+    animation: scroll 30s linear infinite;
+}
+
 @media (max-width: 1023px) {
     #mobile-menu-2 {
         position: absolute;
