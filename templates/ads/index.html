@@ -1,0 +1,445 @@
+{% extends "ads/_base.html" %}
+{% load static %}
+
+{% block content %}
+    <!--suppress HtmlUnknownTag -->
+{#    <header style="background-image: url({% static 'ads/assets/header.jpg' %})" class="relative bg-cover w-full h-screen after:absolute after:content-[''] after:bg-slate-950 after:opacity-70 after:top-0 after:h-full after:w-full after:z-10">#}
+
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900 to-gray-900/50"></div>
+            <img src="{% static 'ads/assets/header.jpg' %}" alt="Background" class="w-full h-full object-cover">
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl">
+                <h1 class="text-6xl md:text-7xl font-bold mb-8 text-white">
+                    Your Budget
+                    <span class="block text-sky-400 mt-2">Our Quotation</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-12 max-w-2xl">
+                    We craft engaging digital experiences that captivate audiences and drive results.
+                    From innovative design to strategic marketing solutions.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="px-8 py-4 bg-sky-400 text-gray-900 rounded-full font-semibold hover:bg-sky-500 transition-colors">
+                        Get Started
+                    </a>
+                    <a href="#" class="text-gray-300 px-8 py-4 border-2 border-white rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-colors">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="relative bg-sky-400 overflow-hidden top-[-20px]" style="transform: skew(-1.2deg, -1.2deg)">
+        <div class="scroll-container relative whitespace-nowrap overflow-x-auto py-4">
+            <div class="animate-scroll inline-block">
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Inhouse Production <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Inhouse Graphic Designers <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Inhouse Video Editors <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Inhouse Data Analysts <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Meta Ads Experts <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Google Ads Experts <span class="ml-[66px]">*</span>
+                </span>
+            </div>
+            <!-- Duplicate for smooth infinite scroll -->
+            <div class="animate-scroll inline-block">
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Inhouse Production <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Inhouse Graphic Designers <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Inhouse Video Editors <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Inhouse Data Analysts <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Meta Ads Experts <span class="ml-[66px]">*</span>
+                </span>
+                <span class="inline-flex items-center px-8 text-gray-900 text-lg font-black">
+                    Google Ads Experts <span class="ml-[66px]">*</span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-300">
+                    Why Choose <span class="text-sky-400">Us?</span>
+                </h2>
+                <p class="text-gray-300 text-lg">
+                    With over 6 years of experience in both agency and in-house roles,
+                    we deliver results-driven performance marketing solutions.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- In-house Team Card -->
+                <div class="bg-gray-800 rounded-xl p-8 hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="w-12 h-12 bg-sky-400 rounded-lg flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-300">Complete In-house Team</h3>
+                    <ul class="space-y-3 text-gray-300 ml-3">
+                        <li>• Professional Graphic Designers</li>
+                        <li>• Expert Video Editors</li>
+                        <li>• Skilled Data Analysts</li>
+                        <li>• Dedicated Production Team</li>
+                    </ul>
+                </div>
+
+                <!-- Performance Marketing Card -->
+                <div class="bg-gray-800 rounded-xl p-8 hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="w-12 h-12 bg-sky-400 rounded-lg flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-300">Performance Marketing Expertise</h3>
+                    <ul class="space-y-3 text-gray-300 ml-3">
+                        <li>• Meta Ads Specialists</li>
+                        <li>• Google Ads Experts</li>
+                        <li>• YouTube Advertising</li>
+                        <li>• ROI-Focused Campaigns</li>
+                    </ul>
+                </div>
+
+                <!-- Experience & Cost Card -->
+                <div class="bg-gray-800 rounded-xl p-8 hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="w-12 h-12 bg-sky-400 rounded-lg flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-300">Value & Experience</h3>
+                    <ul class="space-y-3 text-gray-300 ml-3">
+                        <li>• 6+ Years Industry Experience</li>
+                        <li>• Cost-Effective Solutions</li>
+                        <li>• Agency & In-house Expertise</li>
+                        <li>• Proven Track Record</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+{#            <div class="grid md:grid-cols-4 gap-8 mt-16 bg-gray-800/50 rounded-2xl p-8">#}
+{#                <div class="text-center">#}
+{#                    <div class="text-4xl font-bold text-sky-400 mb-2">6+</div>#}
+{#                    <div class="text-gray-300">Years Experience</div>#}
+{#                </div>#}
+{#                <div class="text-center">#}
+{#                    <div class="text-4xl font-bold text-sky-400 mb-2">100+</div>#}
+{#                    <div class="text-gray-300">Clients Served</div>#}
+{#                </div>#}
+{#                <div class="text-center">#}
+{#                    <div class="text-4xl font-bold text-sky-400 mb-2">25+</div>#}
+{#                    <div class="text-gray-300">Team Members</div>#}
+{#                </div>#}
+{#                <div class="text-center">#}
+{#                    <div class="text-4xl font-bold text-sky-400 mb-2">95%</div>#}
+{#                    <div class="text-gray-300">Client Retention</div>#}
+{#                </div>#}
+{#            </div>#}
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16">
+                <a href="#" class="inline-flex items-center px-8 py-4 bg-sky-400 text-gray-900 rounded-full font-semibold hover:bg-sky-500 transition-colors">
+                    Start Your Project
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Showcase Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-300">
+                    Client <span class="text-sky-400">Success Stories</span>
+                </h2>
+                <p class="text-gray-300 text-lg">
+                    Take a look at some of our successful campaigns and the results we've delivered for our clients.
+                </p>
+            </div>
+
+            <!-- Clients Grid -->
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+                <!-- Client Info -->
+                <div>
+                    <div class="bg-gray-800 rounded-xl p-8 text-gray-300">
+                        <img src="{% static 'ads/assets/oolka_logo.jpg' %}" alt="Oolka" class="h-12 mb-6 rounded-xl inline-block">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-300 ml-2 inline">Oolka</h3>
+                        <p class="text-gray-300 mb-6 font-semibold">
+                            Promoting the app and increasing users through strategic digital marketing and engaging social media content.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-sky-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Increased user engagement by 150%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-sky-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Optimized ad campaigns for better ROI</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-sky-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                <span>Created viral social media content</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WorkIndia Mention -->
+                    <div class="mt-8 bg-gray-800 rounded-xl p-8">
+                        <img src="{% static 'ads/assets/workindia_logo.png' %}" alt="WorkIndia" class="h-12 mb-6 rounded-xl inline-block">
+                        <h3 class="text-2xl font-bold mb-4 text-gray-300 ml-2 inline">WorkIndia</h3>
+                        <p class="text-gray-300 font-semibold">
+                            Currently partnering to transform their digital presence and enhance their market reach.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Video Carousel -->
+                <div class="relative">
+                    <!-- Mobile Frame -->
+                    <div class="relative mx-auto w-[280px] h-[580px] bg-gray-800 rounded-[1rem] p-4 shadow-xl">
+                        <!-- Inner Frame -->
+                        <div class="relative w-full h-full bg-black rounded-[0.5rem] overflow-hidden">
+                            <!-- Video Carousel -->
+                            <div class="w-full h-full" id="videoCarousel">
+                                <!-- Videos will be loaded dynamically -->
+                            </div>
+
+                            <!-- Navigation Arrows -->
+                            <button class="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-gray-900/70 rounded-full hover:bg-gray-900/90 transition-colors z-10" id="prevButton">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+                            <button class="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-gray-900/70 rounded-full hover:bg-gray-900/90 transition-colors z-10" id="nextButton">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+
+                            <!-- Carousel Progress -->
+                            <div class="absolute bottom-6 left-0 right-0 flex justify-center items-center space-x-2" id="progressDots">
+                                <!-- Dots will be added dynamically -->
+                            </div>
+
+                            <!-- Mute Button -->
+                            <button class="absolute top-4 right-4 p-2 bg-gray-900/70 rounded-full hover:bg-gray-900/90 transition-colors z-10" id="muteButton">
+                                <svg class="w-6 h-6 text-white" id="soundIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+                                </svg>
+                            </button>
+
+                            <!-- Current Video Info -->
+                            <div class="absolute bottom-16 left-0 right-0 text-center text-white/80 text-sm">
+                                <span id="currentIndex">1</span>/<span id="totalVideos">1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-r bg-sky-600 to-blue-800 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6">Ready to Transform Your Brand?</h2>
+            <p class="text-xl text-white/90 mb-8">Let's create something extraordinary together. Our team is ready to bring your vision to life.</p>
+            <div class="space-x-4">
+                <a href="#" class="inline-block bg-white text-sky-800 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                    Get Started
+                </a>
+                <a href="#" class="inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors">
+                    View Our Work
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="border-t border-gray-800 pt-8 text-sm text-center">
+            <p>&copy; {% now 'Y' %} FirstReference. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const videoUrls = [
+            '{% static "ads/assets/Videos/Untitled-2025-01-19 15 19 44(copy)-1 (1).MP4" %}',
+            '{% static "ads/assets/Videos/Cashback_Aishwarya aayi Final.mp4" %}',
+            '{% static "ads/assets/Videos/DAARU.mp4" %}',
+            '{% static "ads/assets/Videos/Did you know.mp4" %}',
+            '{% static "ads/assets/Videos/EMI 2.mp4" %}',
+            '{% static "ads/assets/Videos/MAYOO 1.mp4" %}',
+            '{% static "ads/assets/Videos/OOLAK V1 SUB.mp4" %}',
+            '{% static "ads/assets/Videos/OOLKA V2 SUB.mp4" %}',
+            '{% static "ads/assets/Videos/OOLKA V3 SUB.mp4" %}',
+            '{% static "ads/assets/Videos/OOLKA V4 SUB.mp4" %}',
+            '{% static "ads/assets/Videos/OOLKA V5 SUB.mp4" %}',
+            '{% static "ads/assets/Videos/Q1-with subs.mp4" %}',
+            '{% static "ads/assets/Videos/Q2_street perf.mp4" %}',
+            '{% static "ads/assets/Videos/Q3_final.mp4" %}',
+            '{% static "ads/assets/Videos/Q4_final.mp4" %}',
+            '{% static "ads/assets/Videos/Q5_final.mp4" %}',
+            '{% static "ads/assets/Videos/Remix Ad-video-export-2025-01-18T16-45-52.165Z (1).mp4" %}',
+            '{% static "ads/assets/Videos/Sj_EMI (1).mp4" %}',
+        ];
+
+       const carousel = document.getElementById('videoCarousel');
+        const muteButton = document.getElementById('muteButton');
+        const soundIcon = document.getElementById('soundIcon');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const progressDots = document.getElementById('progressDots');
+        const currentIndexSpan = document.getElementById('currentIndex');
+        const totalVideosSpan = document.getElementById('totalVideos');
+
+        let currentVideoIndex = 0;
+        let isMuted = true;
+        let videos = [];
+
+        // Initialize carousel
+        function initCarousel() {
+            // Clear existing content
+            carousel.innerHTML = '';
+            progressDots.innerHTML = '';
+            videos = [];
+
+            // Update total videos count
+            totalVideosSpan.textContent = videoUrls.length;
+
+            // Create videos
+            videoUrls.forEach((url, index) => {
+                // Create video element
+                const video = document.createElement('video');
+                video.src = url;
+                video.classList.add('absolute', 'inset-0', 'w-full', 'h-full', 'object-cover');
+                video.style.display = index === 0 ? 'block' : 'none';
+                video.playsInline = true;
+                video.loop = true;
+                video.muted = isMuted;
+                carousel.appendChild(video);
+                videos.push(video);
+
+                // Create progress dot
+                const dot = document.createElement('button');
+                dot.classList.add('w-2', 'h-2', 'rounded-full', 'transition-all');
+                dot.classList.toggle('bg-sky-400', index === 0);
+                dot.classList.toggle('bg-gray-500', index !== 0);
+                dot.addEventListener('click', () => showSlide(index));
+                progressDots.appendChild(dot);
+            });
+
+            // Start playing first video
+            if (videos.length > 0) {
+                videos[0].play();
+                updateNavigation();
+            }
+        }
+
+        // Show specific slide
+        function showSlide(index) {
+            videos.forEach((video, idx) => {
+                if (idx === index) {
+                    video.style.display = 'block';
+                    video.play();
+                } else {
+                    video.style.display = 'none';
+                    video.pause();
+                }
+            });
+            currentVideoIndex = index;
+            currentIndexSpan.textContent = index + 1;
+            updateNavigation();
+        }
+
+        // Update navigation state
+        function updateNavigation() {
+            // Update dots
+            const dots = progressDots.children;
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('bg-sky-400', i === currentVideoIndex);
+                dots[i].classList.toggle('bg-gray-500', i !== currentVideoIndex);
+            }
+
+            // Update arrow buttons
+            prevButton.classList.toggle('opacity-50', currentVideoIndex === 0);
+            prevButton.disabled = currentVideoIndex === 0;
+            nextButton.classList.toggle('opacity-50', currentVideoIndex === videos.length - 1);
+            nextButton.disabled = currentVideoIndex === videos.length - 1;
+        }
+
+        // Navigation handlers
+        prevButton.addEventListener('click', () => {
+            if (currentVideoIndex > 0) {
+                showSlide(currentVideoIndex - 1);
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentVideoIndex < videos.length - 1) {
+                showSlide(currentVideoIndex + 1);
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevButton.click();
+            if (e.key === 'ArrowRight') nextButton.click();
+        });
+
+        // Mute button handler
+        muteButton.addEventListener('click', () => {
+            isMuted = !isMuted;
+            videos.forEach(video => {
+                video.muted = isMuted;
+            });
+
+            if (isMuted) {
+                soundIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>`;
+            } else {
+                soundIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.012l-4.714-4.714H4.5A1.5 1.5 0 013 11.798v-2.596a1.5 1.5 0 011.5-1.5h2.786l4.714-4.714A1 1 0 0113 3.87v16.26a1 1 0 01-1.707.707z"/>`;
+            }
+        });
+
+        // Initialize the carousel
+        initCarousel();
+    });
+    </script>
+{% endblock %}

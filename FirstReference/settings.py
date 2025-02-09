@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-q*lyp029dk%07=w=nmvy_8bbrh&df$hlp6vtkcwfg$-f!wq-w)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.firstreference.in', 'firstreference.in', '0.0.0.0', '145.223.20.238','localhost']
+ALLOWED_HOSTS = ['www.firstreference.in', 'firstreference.in', '0.0.0.0', '145.223.20.238','localhost', 'ads.firstreference.in']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'compressor',
+    'ad_agency',
 ]
 
 MIDDLEWARE = [

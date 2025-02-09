@@ -6,11 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 django-compressor = "*"
-gunicorn = "*"
-psycopg2-binary = "*"
+django-wordpress-api = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.12.3"
-
+python_version = "3.9.12"
