@@ -3,4 +3,4 @@
 node_modules/
 */__pycache__/
 static/CACHE
-static/ads/assets/videos
+static/ads/assets/Videos

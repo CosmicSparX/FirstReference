@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-q*lyp029dk%07=w=nmvy_8bbrh&df$hlp6vtkcwfg$-f!wq-w)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.firstreference.in', 'firstreference.in', '0.0.0.0', '145.223.20.238','localhost', 'ads.firstreference.in']
+ALLOWED_HOSTS = ['www.firstreference.in', 'firstreference.in', '0.0.0.0', '145.223.20.238','localhost', 'ads.firstreference.in', 'www.ads.firstreference.in']
 
 
 # Application definition
@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'compressor',
     'ad_agency',
+    'django_hosts',    
 ]
 
 MIDDLEWARE = [
+    'django_hosts.middleware.HostsRequestMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,9 +51,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_hosts.middleware.HostsRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'FirstReference.urls'
+
+ROOT_HOSTCONF = 'FirstReference.hosts'
+DEFAULT_HOST = 'www'
 
 TEMPLATES = [
     {
