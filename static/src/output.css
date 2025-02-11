@@ -2314,7 +2314,7 @@ input:checked + .toggle-bg {
 }
 
 .animate-scroll {
-  animation: scroll 30s linear infinite;
+  animation: scroll 10s linear infinite;
 }
 
 @media (max-width: 1023px) {
