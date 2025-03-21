@@ -10,7 +10,7 @@ router = DefaultRouter()
 router.register(r'applicants', ApplicantViewSet)
 
 urlpatterns = [
-    path('router/', include(router.urls)),
+    path('/', include(router.urls)),
     path("register/", RegisterView.as_view(), name="rest_register"),
     path("login/", LoginView.as_view(), name="rest_login"),
     path("logout/", LogoutView.as_view(), name="rest_logout"),
