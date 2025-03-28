@@ -15,24 +15,19 @@ applicant_router.register(r'applicants', ApplicantViewSet)
 
 urlpatterns = [
     # Candidate Routes
-    path('api/candidate/', include(candidate_router.urls)),
-    path('api/candidate/check-email/', CandidateUserViewSet.as_view({'post': 'check_email'})),
-    path('api/candidate/check-mobile/', CandidateUserViewSet.as_view({'post': 'check_mobile'})),
-    path('api/candidate/login/', CandidateUserViewSet.as_view({'post': 'login'})),
-    path('api/candidate/register/', CandidateUserViewSet.as_view({'post': 'register'})),
+    path('candidate/', include(candidate_router.urls)),
+    path('candidate/check-email/', CandidateUserViewSet.as_view({'post': 'check_email'})),
+    path('candidate/check-mobile/', CandidateUserViewSet.as_view({'post': 'check_mobile'})),
+    path('candidate/login/', CandidateUserViewSet.as_view({'post': 'login'})),
+    path('candidate/register/', CandidateUserViewSet.as_view({'post': 'register'})),
 
     # Org Routes
-    path('api/organization/', include(organization_router.urls)),
-    path('api/organization/check-email/', OrganizationUserViewSet.as_view({'post': 'check_email'})),
-    path('api/organization/check-mobile/', OrganizationUserViewSet.as_view({'post': 'check_mobile'})),
-    path('api/organization/login/', OrganizationUserViewSet.as_view({'post': 'login'})),
-    path('api/organization/register/', OrganizationUserViewSet.as_view({'post': 'register'})),
+    path('organization/', include(organization_router.urls)),
+    path('organization/check-email/', OrganizationUserViewSet.as_view({'post': 'check_email'})),
+    path('organization/check-mobile/', OrganizationUserViewSet.as_view({'post': 'check_mobile'})),
+    path('organization/login/', OrganizationUserViewSet.as_view({'post': 'login'})),
+    path('organization/register/', OrganizationUserViewSet.as_view({'post': 'register'})),
 
     # Applicant Routes
-
     path('router/', include(applicant_router.urls)),
-    # path("register/", RegisterView.as_view(), name="rest_register"),
-    # path("login/", LoginView.as_view(), name="rest_login"),
-    # path("logout/", LogoutView.as_view(), name="rest_logout"),
-    # path("user/", UserDetailsView.as_view(), name="rest_user_details"),
 ]
