@@ -21,6 +21,8 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: 22
         script: |
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/git_firstReference
           cd ~/FirstReference/
           git pull origin main
           sudo systemctl restart nginx
