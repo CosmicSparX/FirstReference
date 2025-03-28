@@ -1,0 +1,29 @@
+name: Deploy on VPC
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: SSH into VPC and Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPC_HOST }}
+        username: ${{ secrets.VPC_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          eval $(ssh-agent)
+          ssh-add /home/cosmic/.ssh/.git_firstReference
+          cd /home/cosmic/FirstReference/
+          git pull origin main
+          sudo systemctl restart nginx
+          sudo systemctl restart gunicorn
