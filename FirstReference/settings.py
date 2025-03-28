@@ -43,11 +43,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'api',
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "dj_rest_auth",
-    "dj_rest_auth.registration",
 ]
 
 MIDDLEWARE = [
@@ -157,4 +152,3 @@ REST_FRAMEWORK = {
     ]
 }
 
-SITE_ID = 1
