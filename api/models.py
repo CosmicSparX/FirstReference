@@ -64,6 +64,17 @@ class CandidateUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='candidate_users',
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='candidate_users',
+        blank=True
+    )
+
     def __str__(self):
         return f"{self.name} - {self.mobile}"
 
@@ -114,6 +125,17 @@ class OrganizationUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['name', 'email', 'date_of_birth']
 
     objects = CustomUserManager()
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='organization_users',
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='organization_users',
+        blank=True
+    )
 
     def __str__(self):
         return f"{self.name} - {self.mobile}"

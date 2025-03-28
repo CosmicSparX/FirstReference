@@ -6,7 +6,6 @@ from django.db import transaction
 from django.utils import timezone
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
-from django.contrib.auth.hashers import make_password
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 
