@@ -6,48 +6,48 @@ from django.core.exceptions import ValidationError
 
 class CustomUserManager(BaseUserManager):
     """
-    Custom user model manager where mobile is the unique identifier
+    Custom user model manager where phone is the unique identifier
     """
 
-    def create_user(self, mobile, password=None, **extra_fields):
+    def create_user(self, phone, password=None, **extra_fields):
         """
-        Create and save a User with the given mobile and password.
+        Create and save a User with the given phone and password.
         """
-        if not mobile:
-            raise ValueError('Mobile number must be set')
+        if not phone:
+            raise ValueError('phone number must be set')
 
-        user = self.model(mobile=mobile, **extra_fields)
+        user = self.model(phone=phone, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, mobile, password=None, **extra_fields):
+    def create_superuser(self, phone, password=None, **extra_fields):
         """
-        Create and save a SuperUser with the given mobile and password.
+        Create and save a SuperUser with the given phone and password.
         """
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
 
-        return self.create_user(mobile, password, **extra_fields)
+        return self.create_user(phone, password, **extra_fields)
 
 
 class CandidateUser(AbstractBaseUser, PermissionsMixin):
     """
     Custom user model for candidates
     """
-    # Mobile number validation
-    mobile_validator = RegexValidator(
+    # phone number validation
+    phone_validator = RegexValidator(
         regex=r'^\d{10}$',
-        message="Mobile number must be 10 digits"
+        message="phone number must be 10 digits"
     )
 
     # Basic fields
     name = models.CharField(max_length=255)
-    mobile = models.CharField(
+    phone = models.CharField(
         max_length=10,
         unique=True,
-        validators=[mobile_validator]
+        validators=[phone_validator]
     )
     email = models.EmailField(unique=True)
     date_of_birth = models.DateField()
@@ -58,8 +58,8 @@ class CandidateUser(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # Use mobile as the unique identifier
-    USERNAME_FIELD = 'mobile'
+    # Use phone as the unique identifier
+    USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ['name', 'email', 'date_of_birth']
 
     objects = CustomUserManager()
@@ -76,36 +76,36 @@ class CandidateUser(AbstractBaseUser, PermissionsMixin):
     )
 
     def __str__(self):
-        return f"{self.name} - {self.mobile}"
+        return f"{self.name} - {self.phone}"
 
     def clean(self):
         """
         Additional validation
         """
-        # Ensure unique email and mobile
+        # Ensure unique email and phone
         if CandidateUser.objects.exclude(pk=self.pk).filter(email=self.email).exists():
             raise ValidationError({'email': 'A user with this email already exists.'})
 
-        if CandidateUser.objects.exclude(pk=self.pk).filter(mobile=self.mobile).exists():
-            raise ValidationError({'mobile': 'A user with this mobile number already exists.'})
+        if CandidateUser.objects.exclude(pk=self.pk).filter(phone=self.phone).exists():
+            raise ValidationError({'phone': 'A user with this phone number already exists.'})
 
 
 class OrganizationUser(AbstractBaseUser, PermissionsMixin):
     """
     Custom user model for organizations
     """
-    # Mobile number validation
-    mobile_validator = RegexValidator(
+    # Phone number validation
+    phone_validator = RegexValidator(
         regex=r'^\d{10}$',
-        message="Mobile number must be 10 digits"
+        message="Phone number must be 10 digits"
     )
 
     # Basic fields
     name = models.CharField(max_length=255)
-    mobile = models.CharField(
+    phone = models.CharField(
         max_length=10,
         unique=True,
-        validators=[mobile_validator]
+        validators=[phone_validator]
     )
     email = models.EmailField(unique=True)
     date_of_birth = models.DateField()
@@ -120,8 +120,8 @@ class OrganizationUser(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    # Use mobile as the unique identifier
-    USERNAME_FIELD = 'mobile'
+    # Use phone as the unique identifier
+    USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ['name', 'email', 'date_of_birth']
 
     objects = CustomUserManager()
@@ -138,18 +138,18 @@ class OrganizationUser(AbstractBaseUser, PermissionsMixin):
     )
 
     def __str__(self):
-        return f"{self.name} - {self.mobile}"
+        return f"{self.name} - {self.phone}"
 
     def clean(self):
         """
         Additional validation
         """
-        # Ensure unique email and mobile
+        # Ensure unique email and phone
         if OrganizationUser.objects.exclude(pk=self.pk).filter(email=self.email).exists():
             raise ValidationError({'email': 'A user with this email already exists.'})
 
-        if OrganizationUser.objects.exclude(pk=self.pk).filter(mobile=self.mobile).exists():
-            raise ValidationError({'mobile': 'A user with this mobile number already exists.'})
+        if OrganizationUser.objects.exclude(pk=self.pk).filter(phone=self.phone).exists():
+            raise ValidationError({'phone': 'A user with this phone number already exists.'})
 
 
 class Applicant(models.Model):
