@@ -67,30 +67,30 @@ class CandidateUserViewSet(viewsets.GenericViewSet):
         })
 
     @action(detail=False, methods=['POST'])
-    def check_mobile(self, request):
+    def check_phone(self, request):
         """
-        Check if mobile number already exists in the database
+        Check if phone number already exists in the database
 
         Request Body:
         {
-            "mobile": "1234567890"
+            "phone": "1234567890"
         }
         """
-        mobile = request.data.get('mobile', '').strip()
+        phone = request.data.get('phone', '').strip()
 
-        # Basic mobile number validation
-        if not mobile.isdigit() or len(mobile) < 10:
+        # Basic phone number validation
+        if not phone.isdigit() or len(phone) < 10:
             return Response({
                 'exists': False,
-                'message': 'Invalid mobile number format'
+                'message': 'Invalid phone number format'
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        # Check if mobile exists
-        mobile_exists = CandidateUser.objects.filter(mobile=mobile).exists()
+        # Check if phone exists
+        phone_exists = CandidateUser.objects.filter(phone=phone).exists()
 
         return Response({
-            'exists': mobile_exists,
-            'message': 'Mobile number already registered' if mobile_exists else 'Mobile number is available'
+            'exists': phone_exists,
+            'message': 'Phone number already registered' if phone_exists else 'Phone number is available'
         })
 
     @action(detail=False, methods=['POST'])
@@ -100,18 +100,18 @@ class CandidateUserViewSet(viewsets.GenericViewSet):
 
         Request Body:
         {
-            "mobile": "1234567890",
+            "phone": "1234567890",
             "password": "userpassword"
         }
         """
         serializer = CandidateLoginSerializer(data=request.data)
 
         if serializer.is_valid():
-            mobile = serializer.validated_data.get('mobile')
+            phone = serializer.validated_data.get('phone')
             password = serializer.validated_data.get('password')
 
             # Authenticate user
-            user = authenticate(username=mobile, password=password)
+            user = authenticate(username=phone, password=password)
 
             if user:
                 # Generate or get existing token
@@ -121,7 +121,7 @@ class CandidateUserViewSet(viewsets.GenericViewSet):
                     'token': token.key,
                     'user_id': user.id,
                     'name': user.name,
-                    'mobile': user.mobile,
+                    'phone': user.phone,
                     'email': user.email
                 })
 
@@ -139,7 +139,7 @@ class CandidateUserViewSet(viewsets.GenericViewSet):
         Request Body:
         {
             "name": "Full Name",
-            "mobile": "1234567890",
+            "phone": "1234567890",
             "email": "example@email.com",
             "date_of_birth": "YYYY-MM-DD",
             "password1": "password",
@@ -159,7 +159,7 @@ class CandidateUserViewSet(viewsets.GenericViewSet):
                 'token': token.key,
                 'user_id': user.id,
                 'name': user.name,
-                'mobile': user.mobile,
+                'phone': user.phone,
                 'email': user.email
             }, status=status.HTTP_201_CREATED)
 
@@ -205,30 +205,30 @@ class OrganizationUserViewSet(viewsets.GenericViewSet):
         })
 
     @action(detail=False, methods=['POST'])
-    def check_mobile(self, request):
+    def check_phone(self, request):
         """
-        Check if mobile number already exists in the database
+        Check if phone number already exists in the database
 
         Request Body:
         {
-            "mobile": "1234567890"
+            "phone": "1234567890"
         }
         """
-        mobile = request.data.get('mobile', '').strip()
+        phone = request.data.get('phone', '').strip()
 
-        # Basic mobile number validation
-        if not mobile.isdigit() or len(mobile) < 10:
+        # Basic phone number validation
+        if not phone.isdigit() or len(phone) < 10:
             return Response({
                 'exists': False,
-                'message': 'Invalid mobile number format'
+                'message': 'Invalid phone number format'
             }, status=status.HTTP_400_BAD_REQUEST)
 
-        # Check if mobile exists
-        mobile_exists = OrganizationUser.objects.filter(mobile=mobile).exists()
+        # Check if phone exists
+        phone_exists = OrganizationUser.objects.filter(phone=phone).exists()
 
         return Response({
-            'exists': mobile_exists,
-            'message': 'Mobile number already registered' if mobile_exists else 'Mobile number is available'
+            'exists': phone_exists,
+            'message': 'Phone number already registered' if phone_exists else 'Phone number is available'
         })
 
     @action(detail=False, methods=['POST'])
@@ -238,18 +238,18 @@ class OrganizationUserViewSet(viewsets.GenericViewSet):
 
         Request Body:
         {
-            "mobile": "1234567890",
+            "phone": "1234567890",
             "password": "userpassword"
         }
         """
         serializer = OrganizationLoginSerializer(data=request.data)
 
         if serializer.is_valid():
-            mobile = serializer.validated_data.get('mobile')
+            phone = serializer.validated_data.get('phone')
             password = serializer.validated_data.get('password')
 
             # Authenticate user
-            user = authenticate(username=mobile, password=password)
+            user = authenticate(username=phone, password=password)
 
             if user:
                 # Generate or get existing token
@@ -259,7 +259,7 @@ class OrganizationUserViewSet(viewsets.GenericViewSet):
                     'token': token.key,
                     'user_id': user.id,
                     'name': user.name,
-                    'mobile': user.mobile,
+                    'phone': user.phone,
                     'email': user.email
                 })
 
@@ -277,7 +277,7 @@ class OrganizationUserViewSet(viewsets.GenericViewSet):
         Request Body:
         {
             "name": "Organization Name",
-            "mobile": "1234567890",
+            "phone": "1234567890",
             "email": "example@email.com",
             "date_of_birth": "YYYY-MM-DD",
             "password1": "password",
@@ -297,7 +297,7 @@ class OrganizationUserViewSet(viewsets.GenericViewSet):
                 'token': token.key,
                 'user_id': user.id,
                 'name': user.name,
-                'mobile': user.mobile,
+                'phone': user.phone,
                 'email': user.email
             }, status=status.HTTP_201_CREATED)
 

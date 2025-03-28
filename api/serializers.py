@@ -35,7 +35,7 @@ class CandidateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CandidateUser
         fields = [
-            'id', 'name', 'mobile', 'email',
+            'id', 'name', 'phone', 'email',
             'date_of_birth', 'password1', 'password2'
         ]
         read_only_fields = ['id']
@@ -60,7 +60,7 @@ class CandidateUserSerializer(serializers.ModelSerializer):
 
         # Create user
         user = CandidateUser.objects.create_user(
-            mobile=validated_data['mobile'],
+            phone=validated_data['phone'],
             password=password,
             **validated_data
         )
@@ -71,9 +71,9 @@ class CandidateLoginSerializer(serializers.Serializer):
     """
     Serializer for candidate user login
     """
-    mobile = serializers.CharField(
+    phone = serializers.CharField(
         required=True,
-        validators=[CandidateUser.mobile_validator]
+        validators=[CandidateUser.phone_validator]
     )
     password = serializers.CharField(
         required=True,
@@ -99,7 +99,7 @@ class OrganizationUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrganizationUser
         fields = [
-            'id', 'name', 'mobile', 'email',
+            'id', 'name', 'phone', 'email',
             'date_of_birth', 'organization_type',
             'registration_number', 'password1', 'password2'
         ]
@@ -129,7 +129,7 @@ class OrganizationUserSerializer(serializers.ModelSerializer):
 
         # Create user
         user = OrganizationUser.objects.create_user(
-            mobile=validated_data['mobile'],
+            phone=validated_data['phone'],
             password=password,
             **validated_data
         )
@@ -140,9 +140,9 @@ class OrganizationLoginSerializer(serializers.Serializer):
     """
     Serializer for organization user login
     """
-    mobile = serializers.CharField(
+    phone = serializers.CharField(
         required=True,
-        validators=[OrganizationUser.mobile_validator]
+        validators=[OrganizationUser.phone_validator]
     )
     password = serializers.CharField(
         required=True,
