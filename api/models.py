@@ -1,6 +1,133 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, User
 from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+
+
+class CustomUserManager(BaseUserManager):
+    """
+    Custom user model manager where mobile is the unique identifier
+    """
+
+    def create_user(self, mobile, password=None, **extra_fields):
+        """
+        Create and save a User with the given mobile and password.
+        """
+        if not mobile:
+            raise ValueError('Mobile number must be set')
+
+        user = self.model(mobile=mobile, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, mobile, password=None, **extra_fields):
+        """
+        Create and save a SuperUser with the given mobile and password.
+        """
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
+
+        return self.create_user(mobile, password, **extra_fields)
+
+
+class CandidateUser(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model for candidates
+    """
+    # Mobile number validation
+    mobile_validator = RegexValidator(
+        regex=r'^\d{10}$',
+        message="Mobile number must be 10 digits"
+    )
+
+    # Basic fields
+    name = models.CharField(max_length=255)
+    mobile = models.CharField(
+        max_length=10,
+        unique=True,
+        validators=[mobile_validator]
+    )
+    email = models.EmailField(unique=True)
+    date_of_birth = models.DateField()
+
+    # System fields
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # Use mobile as the unique identifier
+    USERNAME_FIELD = 'mobile'
+    REQUIRED_FIELDS = ['name', 'email', 'date_of_birth']
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return f"{self.name} - {self.mobile}"
+
+    def clean(self):
+        """
+        Additional validation
+        """
+        # Ensure unique email and mobile
+        if CandidateUser.objects.exclude(pk=self.pk).filter(email=self.email).exists():
+            raise ValidationError({'email': 'A user with this email already exists.'})
+
+        if CandidateUser.objects.exclude(pk=self.pk).filter(mobile=self.mobile).exists():
+            raise ValidationError({'mobile': 'A user with this mobile number already exists.'})
+
+
+class OrganizationUser(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model for organizations
+    """
+    # Mobile number validation
+    mobile_validator = RegexValidator(
+        regex=r'^\d{10}$',
+        message="Mobile number must be 10 digits"
+    )
+
+    # Basic fields
+    name = models.CharField(max_length=255)
+    mobile = models.CharField(
+        max_length=10,
+        unique=True,
+        validators=[mobile_validator]
+    )
+    email = models.EmailField(unique=True)
+    date_of_birth = models.DateField()
+
+    # Additional organization fields
+    organization_type = models.CharField(max_length=100, blank=True, null=True)
+    registration_number = models.CharField(max_length=100, blank=True, null=True)
+
+    # System fields
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    # Use mobile as the unique identifier
+    USERNAME_FIELD = 'mobile'
+    REQUIRED_FIELDS = ['name', 'email', 'date_of_birth']
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return f"{self.name} - {self.mobile}"
+
+    def clean(self):
+        """
+        Additional validation
+        """
+        # Ensure unique email and mobile
+        if OrganizationUser.objects.exclude(pk=self.pk).filter(email=self.email).exists():
+            raise ValidationError({'email': 'A user with this email already exists.'})
+
+        if OrganizationUser.objects.exclude(pk=self.pk).filter(mobile=self.mobile).exists():
+            raise ValidationError({'mobile': 'A user with this mobile number already exists.'})
 
 
 class Applicant(models.Model):

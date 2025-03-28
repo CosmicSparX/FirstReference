@@ -4,11 +4,17 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django.db import transaction
 from django.utils import timezone
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
+from django.contrib.auth.hashers import make_password
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 from .models import (
     Applicant, IdentityVerification, AddressVerification,
     AcademicVerification, EmploymentVerification, CreditReport,
-    ProfessionalLicense, ReferenceVerification, VerificationStatus
+    ProfessionalLicense, ReferenceVerification, VerificationStatus,
+    CandidateUser, OrganizationUser
 )
 from .serializers import (
     ApplicantSerializer, ApplicantListSerializer, ApplicantDetailSerializer,
@@ -16,8 +22,287 @@ from .serializers import (
     AcademicVerificationSerializer, EmploymentVerificationSerializer,
     CreditReportSerializer, ProfessionalLicenseSerializer,
     ReferenceVerificationSerializer, VerificationStatusSerializer,
-    AdminVerificationSerializer
+    AdminVerificationSerializer, CandidateUserSerializer,
+    OrganizationUserSerializer,
+    CandidateLoginSerializer,
+    OrganizationLoginSerializer
 )
+
+
+class CandidateUserViewSet(viewsets.GenericViewSet):
+    """
+    ViewSet for Candidate User operations
+    Handles registration, login, and unique identifier checks
+    """
+    queryset = CandidateUser.objects.all()
+    serializer_class = CandidateUserSerializer
+    permission_classes = [permissions.AllowAny]
+
+    @action(detail=False, methods=['POST'])
+    def check_email(self, request):
+        """
+        Check if email already exists in the database
+
+        Request Body:
+        {
+            "email": "example@email.com"
+        }
+        """
+        email = request.data.get('email', '').strip()
+
+        # Validate email format
+        try:
+            validate_email(email)
+        except ValidationError:
+            return Response({
+                'exists': False,
+                'message': 'Invalid email format'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if email exists
+        email_exists = CandidateUser.objects.filter(email=email).exists()
+
+        return Response({
+            'exists': email_exists,
+            'message': 'Email already registered' if email_exists else 'Email is available'
+        })
+
+    @action(detail=False, methods=['POST'])
+    def check_mobile(self, request):
+        """
+        Check if mobile number already exists in the database
+
+        Request Body:
+        {
+            "mobile": "1234567890"
+        }
+        """
+        mobile = request.data.get('mobile', '').strip()
+
+        # Basic mobile number validation
+        if not mobile.isdigit() or len(mobile) < 10:
+            return Response({
+                'exists': False,
+                'message': 'Invalid mobile number format'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if mobile exists
+        mobile_exists = CandidateUser.objects.filter(mobile=mobile).exists()
+
+        return Response({
+            'exists': mobile_exists,
+            'message': 'Mobile number already registered' if mobile_exists else 'Mobile number is available'
+        })
+
+    @action(detail=False, methods=['POST'])
+    def login(self, request):
+        """
+        Login endpoint for candidate users
+
+        Request Body:
+        {
+            "mobile": "1234567890",
+            "password": "userpassword"
+        }
+        """
+        serializer = CandidateLoginSerializer(data=request.data)
+
+        if serializer.is_valid():
+            mobile = serializer.validated_data.get('mobile')
+            password = serializer.validated_data.get('password')
+
+            # Authenticate user
+            user = authenticate(username=mobile, password=password)
+
+            if user:
+                # Generate or get existing token
+                token, _ = Token.objects.get_or_create(user=user)
+
+                return Response({
+                    'token': token.key,
+                    'user_id': user.id,
+                    'name': user.name,
+                    'mobile': user.mobile,
+                    'email': user.email
+                })
+
+            return Response({
+                'error': 'Invalid credentials'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['POST'])
+    def register(self, request):
+        """
+        Register a new candidate user
+
+        Request Body:
+        {
+            "name": "Full Name",
+            "mobile": "1234567890",
+            "email": "example@email.com",
+            "date_of_birth": "YYYY-MM-DD",
+            "password1": "password",
+            "password2": "password"
+        }
+        """
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Create user
+            user = serializer.save()
+
+            # Generate token
+            token, _ = Token.objects.get_or_create(user=user)
+
+            return Response({
+                'token': token.key,
+                'user_id': user.id,
+                'name': user.name,
+                'mobile': user.mobile,
+                'email': user.email
+            }, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class OrganizationUserViewSet(viewsets.GenericViewSet):
+    """
+    ViewSet for Organization User operations
+    Handles registration, login, and unique identifier checks
+    """
+    queryset = OrganizationUser.objects.all()
+    serializer_class = OrganizationUserSerializer
+    permission_classes = [permissions.AllowAny]
+
+    @action(detail=False, methods=['POST'])
+    def check_email(self, request):
+        """
+        Check if email already exists in the database
+
+        Request Body:
+        {
+            "email": "example@email.com"
+        }
+        """
+        email = request.data.get('email', '').strip()
+
+        # Validate email format
+        try:
+            validate_email(email)
+        except ValidationError:
+            return Response({
+                'exists': False,
+                'message': 'Invalid email format'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if email exists
+        email_exists = OrganizationUser.objects.filter(email=email).exists()
+
+        return Response({
+            'exists': email_exists,
+            'message': 'Email already registered' if email_exists else 'Email is available'
+        })
+
+    @action(detail=False, methods=['POST'])
+    def check_mobile(self, request):
+        """
+        Check if mobile number already exists in the database
+
+        Request Body:
+        {
+            "mobile": "1234567890"
+        }
+        """
+        mobile = request.data.get('mobile', '').strip()
+
+        # Basic mobile number validation
+        if not mobile.isdigit() or len(mobile) < 10:
+            return Response({
+                'exists': False,
+                'message': 'Invalid mobile number format'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if mobile exists
+        mobile_exists = OrganizationUser.objects.filter(mobile=mobile).exists()
+
+        return Response({
+            'exists': mobile_exists,
+            'message': 'Mobile number already registered' if mobile_exists else 'Mobile number is available'
+        })
+
+    @action(detail=False, methods=['POST'])
+    def login(self, request):
+        """
+        Login endpoint for organization users
+
+        Request Body:
+        {
+            "mobile": "1234567890",
+            "password": "userpassword"
+        }
+        """
+        serializer = OrganizationLoginSerializer(data=request.data)
+
+        if serializer.is_valid():
+            mobile = serializer.validated_data.get('mobile')
+            password = serializer.validated_data.get('password')
+
+            # Authenticate user
+            user = authenticate(username=mobile, password=password)
+
+            if user:
+                # Generate or get existing token
+                token, _ = Token.objects.get_or_create(user=user)
+
+                return Response({
+                    'token': token.key,
+                    'user_id': user.id,
+                    'name': user.name,
+                    'mobile': user.mobile,
+                    'email': user.email
+                })
+
+            return Response({
+                'error': 'Invalid credentials'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['POST'])
+    def register(self, request):
+        """
+        Register a new organization user
+
+        Request Body:
+        {
+            "name": "Organization Name",
+            "mobile": "1234567890",
+            "email": "example@email.com",
+            "date_of_birth": "YYYY-MM-DD",
+            "password1": "password",
+            "password2": "password"
+        }
+        """
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            # Create user
+            user = serializer.save()
+
+            # Generate token
+            token, _ = Token.objects.get_or_create(user=user)
+
+            return Response({
+                'token': token.key,
+                'user_id': user.id,
+                'name': user.name,
+                'mobile': user.mobile,
+                'email': user.email
+            }, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ApplicantViewSet(viewsets.ModelViewSet):

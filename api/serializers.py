@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError as DjangoValidationError
 from .models import (
     Applicant,
     IdentityVerification,
@@ -9,8 +11,143 @@ from .models import (
     CreditReport,
     ProfessionalLicense,
     ReferenceVerification,
-    VerificationStatus
+    VerificationStatus,
+    CandidateUser,
+    OrganizationUser
 )
+
+
+class CandidateUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for candidate user registration
+    """
+    password1 = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={'input_type': 'password'}
+    )
+    password2 = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={'input_type': 'password'}
+    )
+
+    class Meta:
+        model = CandidateUser
+        fields = [
+            'id', 'name', 'mobile', 'email',
+            'date_of_birth', 'password1', 'password2'
+        ]
+        read_only_fields = ['id']
+
+    def validate(self, data):
+        # Check if passwords match
+        if data['password1'] != data['password2']:
+            raise serializers.ValidationError({"password2": "Passwords do not match."})
+
+        # Validate password
+        try:
+            validate_password(data['password1'])
+        except DjangoValidationError as e:
+            raise serializers.ValidationError({"password1": list(e.messages)})
+
+        return data
+
+    def create(self, validated_data):
+        # Remove password2 before creating user
+        validated_data.pop('password2')
+        password = validated_data.pop('password1')
+
+        # Create user
+        user = CandidateUser.objects.create_user(
+            mobile=validated_data['mobile'],
+            password=password,
+            **validated_data
+        )
+        return user
+
+
+class CandidateLoginSerializer(serializers.Serializer):
+    """
+    Serializer for candidate user login
+    """
+    mobile = serializers.CharField(
+        required=True,
+        validators=[CandidateUser.mobile_validator]
+    )
+    password = serializers.CharField(
+        required=True,
+        style={'input_type': 'password'}
+    )
+
+
+class OrganizationUserSerializer(serializers.ModelSerializer):
+    """
+    Serializer for organization user registration
+    """
+    password1 = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={'input_type': 'password'}
+    )
+    password2 = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={'input_type': 'password'}
+    )
+
+    class Meta:
+        model = OrganizationUser
+        fields = [
+            'id', 'name', 'mobile', 'email',
+            'date_of_birth', 'organization_type',
+            'registration_number', 'password1', 'password2'
+        ]
+        read_only_fields = ['id']
+        extra_kwargs = {
+            'organization_type': {'required': False},
+            'registration_number': {'required': False}
+        }
+
+    def validate(self, data):
+        # Check if passwords match
+        if data['password1'] != data['password2']:
+            raise serializers.ValidationError({"password2": "Passwords do not match."})
+
+        # Validate password
+        try:
+            validate_password(data['password1'])
+        except DjangoValidationError as e:
+            raise serializers.ValidationError({"password1": list(e.messages)})
+
+        return data
+
+    def create(self, validated_data):
+        # Remove password2 before creating user
+        validated_data.pop('password2')
+        password = validated_data.pop('password1')
+
+        # Create user
+        user = OrganizationUser.objects.create_user(
+            mobile=validated_data['mobile'],
+            password=password,
+            **validated_data
+        )
+        return user
+
+
+class OrganizationLoginSerializer(serializers.Serializer):
+    """
+    Serializer for organization user login
+    """
+    mobile = serializers.CharField(
+        required=True,
+        validators=[OrganizationUser.mobile_validator]
+    )
+    password = serializers.CharField(
+        required=True,
+        style={'input_type': 'password'}
+    )
 
 
 class UserSerializer(serializers.ModelSerializer):
