@@ -4,15 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+django = "==4.0.0"
 django-compressor = "*"
-django-wordpress-api = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 django-hosts = "*"
 djangorestframework = "*"
-django-allauth = "==0.52.0"
-dj-rest-auth = {extras = ["with_social"], version = "==4.0.0"}
 
 [dev-packages]
 
