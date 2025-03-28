@@ -27,6 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['www.firstreference.in', 'firstreference.in', '0.0.0.0', '145.223.20.238','localhost', 'ads.firstreference.in', 'www.ads.firstreference.in']
 
+AUTH_USER_MODEL = 'api.CandidateUser'
 
 # Application definition
 
@@ -114,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'api.CandidateUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
