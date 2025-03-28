@@ -27,8 +27,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['www.firstreference.in', 'firstreference.in', '0.0.0.0', '145.223.20.238','localhost', 'ads.firstreference.in', 'www.ads.firstreference.in']
 
-AUTH_USER_MODEL = 'api.CandidateUser'
-
 # Application definition
 
 INSTALLED_APPS = [
