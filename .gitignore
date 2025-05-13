@@ -4,4 +4,4 @@ node_modules/
 */__pycache__/
 static/CACHE
 static/ads/assets/Videos
-myenv/lib
+myenv/
